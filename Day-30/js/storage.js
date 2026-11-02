@@ -1,0 +1,8 @@
+(() => {
+const KEY="stockify_combined_inventory";
+const defaults={products:[{id:"PRD-1001",name:"Laptop",category:"Electronics",price:50000,cost:42000,stock:20,minimum:5},{id:"PRD-1002",name:"Mouse",category:"Accessories",price:800,cost:450,stock:50,minimum:10},{id:"PRD-1003",name:"Keyboard",category:"Accessories",price:1500,cost:900,stock:35,minimum:10},{id:"PRD-1004",name:"Monitor",category:"Electronics",price:12000,cost:9500,stock:10,minimum:5},{id:"PRD-1005",name:"Printer",category:"Electronics",price:15000,cost:11000,stock:5,minimum:5}],categories:["Electronics","Accessories","Furniture","Other"],suppliers:[],customers:[],sales:[],returns:[],refunds:[],movements:[],activities:[],notifications:[]};
+function read(){try{const d=JSON.parse(localStorage.getItem(KEY));if(!d||typeof d!=="object")return structuredClone(defaults);return {...structuredClone(defaults),...d};}catch{return structuredClone(defaults)}}
+function write(data){localStorage.setItem(KEY,JSON.stringify(data));window.dispatchEvent(new CustomEvent("inventoryUpdated"));}
+window.DB={key:KEY,read,write,update(fn){const d=read();fn(d);write(d);return d;},id(prefix){return prefix+"-"+Date.now().toString(36).toUpperCase()+"-"+Math.floor(Math.random()*900+100);},money(n){return new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(Number(n)||0);},escape(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}};
+if(!localStorage.getItem(KEY))localStorage.setItem(KEY,JSON.stringify(defaults));
+})();

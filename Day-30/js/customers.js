@@ -1,0 +1,1 @@
+window.saveCustomer=(name,phone)=>{let found;DB.update(d=>{found=d.customers.find(c=>c.phone&&c.phone===phone);if(!found){found={id:DB.id("CUS"),name,phone};d.customers.push(found);}else found.name=name;});return found;};

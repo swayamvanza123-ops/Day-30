@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stockify • Customer Profile</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="app-shell">
+<aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark small">S</span> stockify</a><nav>
+<a href="index.html">▦　Dashboard</a><a href="sales.html">↗　Sales</a><a href="sales-returns.html">↩　Returns & refunds</a><a class="active" href="customer-history.html">♙　Customers</a><a href="reports.html">▤　Reports</a></nav>
+<div class="side-bottom"><span class="avatar">A</span><span><b>Administrator</b><small>Store manager</small></span><button id="logoutBtn" class="icon-btn">⇥</button></div></aside>
+<main class="main"><header class="topbar"><div><p class="eyebrow">CUSTOMER RELATIONSHIPS</p><h1>Customer profiles</h1></div><input id="customerSearch" class="search" placeholder="Search name or phone..."></header>
+<section class="panel"><div class="panel-head"><div><h3>Customer directory</h3><p class="muted">Choose a customer to view their complete account profile.</p></div><span class="pill" id="customerCount">10 customers</span></div>
+<div class="table-wrap"><table><thead><tr><th>Customer</th><th>Phone</th><th>Email</th><th>Orders</th><th>Purchase total</th><th>Action</th></tr></thead><tbody id="customerHistoryTable"></tbody></table></div></section>
+<section id="profileSection" class="profile-section" hidden>
+<div class="profile-heading"><div><p class="eyebrow">CUSTOMER ACCOUNT</p><h2 id="profileName">Customer</h2><p class="muted" id="profileContact"></p></div><span class="pill" id="profileId">Customer ID</span></div>
+<div class="stats-grid profile-stats">
+<article class="stat-card"><span>Total orders</span><strong id="profileOrders">0</strong></article>
+<article class="stat-card"><span>Total purchase amount</span><strong id="profilePurchase">₹0</strong></article>
+<article class="stat-card"><span>Total paid amount</span><strong id="profilePaid">₹0</strong></article>
+<article class="stat-card"><span>Total pending amount</span><strong id="profilePending">₹0</strong></article>
+<article class="stat-card"><span>Returned products</span><strong id="profileReturned">0</strong></article>
+</div>
+<section class="panel profile-panel"><div class="panel-head"><div><h3>Purchase history</h3><p class="muted">Original sales and invoice records</p></div></div>
+    <!-- ADD CUSTOMER FORM -->
+<section class="panel add-customer-panel">
+    <div class="panel-head">
+        <div>
+            <h3>＋ Add New Customer</h3>
+            <p class="muted">Register a customer and create their profile.</p>
+        </div>
+    </div>
+
+    <form id="customerForm" class="customer-form">
+        <div class="form-group">
+            <label for="newCustomerName">Customer Name</label>
+            <input
+                type="text"
+                id="newCustomerName"
+                placeholder="Enter customer name"
+                required
+                minlength="2"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="newCustomerPhone">Phone Number</label>
+            <input
+                type="tel"
+                id="newCustomerPhone"
+                placeholder="Enter phone number"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="newCustomerEmail">Email Address</label>
+            <input
+                type="email"
+                id="newCustomerEmail"
+                placeholder="Enter email address"
+            >
+        </div>
+
+        <button type="submit" class="btn primary">
+            Add Customer
+        </button>
+    </form>
+</section>
+<div class="filter-row"><div><label>From date</label><input id="purchaseFrom" type="date"></div><div><label>To date</label><input id="purchaseTo" type="date"></div><div><label>Payment status</label><select id="purchaseStatus"><option value="">All statuses</option><option value="Paid">Paid</option><option value="Partial">Partial</option><option value="Pending">Pending</option></select></div><div class="filter-buttons"><button class="btn light" id="clearPurchaseFilters" type="button">Clear filters</button></div></div>
+<div class="table-wrap"><table><thead><tr><th>Sale ID</th><th>Sale date</th><th>Products purchased</th><th>Total amount</th><th>Payment status</th><th>Invoice</th></tr></thead><tbody id="profileSalesTable"></tbody></table></div></section>
+<section class="panel profile-panel"><div class="panel-head"><div><h3>Return history</h3><p class="muted">Products returned and refund details</p></div></div><div class="table-wrap"><table><thead><tr><th>Return ID</th><th>Original sale ID</th><th>Product</th><th>Return quantity</th><th>Refund amount</th><th>Status</th><th>Details</th></tr></thead><tbody id="profileReturnsTable"></tbody></table></div></section>
+</section></main></div>
+<div id="invoiceModal" class="modal"><div class="modal-card"><button class="modal-close" id="closeInvoice">×</button><div id="invoiceContent"></div><button class="btn primary" onclick="window.print()">Print invoice</button></div></div>
+<div id="returnDetailModal" class="modal"><div class="modal-card"><button class="modal-close" id="closeReturnDetail">×</button><div id="returnDetailContent"></div></div></div>
+<script src="js/storage.js"></script><script src="js/auth.js"></script><script src="js/invoice.js"></script><script src="js/customerHistory.js"></script></body></html>

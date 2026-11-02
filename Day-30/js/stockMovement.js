@@ -1,0 +1,1 @@
+window.addStockMovement=(productId,type,quantity,reason)=>DB.update(d=>{d.movements.unshift({id:DB.id("MOV"),productId,type,quantity,reason,date:new Date().toISOString()});});

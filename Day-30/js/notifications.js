@@ -1,0 +1,2 @@
+window.addNotification=(message,type="info")=>DB.update(d=>{d.notifications.unshift({id:DB.id("NTF"),message,type,date:new Date().toISOString(),read:false});d.notifications=d.notifications.slice(0,100);});
+window.renderNotifications=()=>{};

@@ -1,0 +1,3 @@
+window.addActivity=(action,details="")=>DB.update(d=>{d.activities.unshift({id:DB.id("ACT"),action,details,date:new Date().toISOString()});d.activities=d.activities.slice(0,100);});
+window.renderActivity=()=>{const el=document.getElementById("activityList");if(!el)return;const d=DB.read();el.innerHTML=d.activities.slice(0,8).map(a=>`<div class="activity-item"><i class="activity-dot"></i><div><b>${DB.escape(a.action)}</b><div>${DB.escape(a.details)}</div><small>${new Date(a.date).toLocaleString()}</small></div></div>`).join("")||'<p class="empty">No activity yet.</p>';};
+document.addEventListener("DOMContentLoaded",renderActivity);window.addEventListener("inventoryUpdated",renderActivity);
